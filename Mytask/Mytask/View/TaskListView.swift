@@ -31,6 +31,7 @@ struct TaskListView: View {
                                     }
                                     .foregroundColor(settingsViewModel.accentColor.color)
                                 }
+                                .accessibilityIdentifier("\(option.rawValue)")
                                 .accessibilityLabel("Filter by \(option.rawValue)")
                                 .accessibilityHint("Filters tasks by \(option.rawValue)")
                             }
@@ -58,6 +59,7 @@ struct TaskListView: View {
                                     }
                                     .foregroundColor(settingsViewModel.accentColor.color)
                                 }
+                                .accessibilityIdentifier("\(option.rawValue)")
                                 .accessibilityLabel("Sort by \(option.rawValue)")
                                 .accessibilityHint("Sorts tasks by \(option.rawValue)")
                             }
@@ -72,19 +74,13 @@ struct TaskListView: View {
                     .padding(.horizontal)
                 }
                 VStack {
-                    if viewModel.isEmptyState, !viewModel.showDeleteAlert, !viewModel.isFetchingTasks {
-                        Spacer()
-                        EmptyStateView(isFilterApplied: viewModel.isEmptyState)
-                            .accessibilityLabel("No tasks available")
-                            .accessibilityHint("Add a task using the plus button")
-                        Spacer().frame(height: 100)
-                    } else if viewModel.tasks.isEmpty, !viewModel.showDeleteAlert, !viewModel.isFetchingTasks {
+                    if viewModel.tasks.isEmpty, !viewModel.showDeleteAlert, !viewModel.isFetchingTasks {
                         Spacer()
                         ClearFilterView(onClearFilters: {
                             viewModel.clearFiltersAndSorts()
                         })
                         .accessibilityLabel("No tasks available")
-                        .accessibilityHint("Clear Filter to load other data using the clear button")
+                        .accessibilityHint("Clear Filter to load other data using the clear button or Add other task")
                         Spacer().frame(height: 100)
                     } else {
                         List {

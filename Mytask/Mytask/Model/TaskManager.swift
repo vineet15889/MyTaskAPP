@@ -37,12 +37,12 @@ class TaskManager: ObservableObject {
         }
     }
     
-    func createTask(title: String, description: String?, priority: String, dueDate: Date, completion: @escaping (_ task: TaskItem) -> Void) {
+    func createTask(title: String, description: String?, priority: Int, dueDate: Date, completion: @escaping (_ task: TaskItem) -> Void) {
         let newTask = TaskItem(context: context)
         newTask.id = UUID()
         newTask.title = title
         newTask.taskDescription = description
-        newTask.priority = priority
+        newTask.priority = Int16(priority)
         newTask.dueDate = dueDate
         newTask.completed = false
         let currentTasks = fetchTasks(filter: nil, sort: nil, offset: 0, limit: .max)
@@ -79,7 +79,7 @@ class TaskManager: ObservableObject {
             let sortDescriptor: NSSortDescriptor
             switch sortOption {
             case .dueDate:
-                sortDescriptor = NSSortDescriptor(key: "dueDate", ascending: true)
+                sortDescriptor = NSSortDescriptor(key: "dueDate", ascending: false)
             case .priority:
                 sortDescriptor = NSSortDescriptor(key: "priority", ascending: false)
             case .title:

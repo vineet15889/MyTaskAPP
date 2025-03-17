@@ -80,7 +80,7 @@ class TaskListViewModel: ObservableObject {
 
     // MARK: - Task Management Functions
 
-    func addTask(title: String, description: String?, priority: String, dueDate: Date) {
+    func addTask(title: String, description: String?, priority: Int, dueDate: Date) {
         taskManager.createTask(title: title, description: description, priority: priority, dueDate: dueDate, completion: { newTask in
             self.tasks.insert(newTask, at: 0)
             self.updateEmptyView()
@@ -143,16 +143,17 @@ class TaskListViewModel: ObservableObject {
     }
 
     func moveTask(from source: IndexSet, to destination: Int) {
+        guard selectedFilterOption == nil || selectedFilterOption == .all else { return }
+        
         tasks.move(fromOffsets: source, toOffset: destination)
         for (index, task) in tasks.enumerated() {
-            task.order = Int64(tasks.count - index)
+            task.order = Int64(tasks.count - index) // Highest order at the top
         }
+
         taskManager.saveContext(completion: {})
 
         let generator = UIImpactFeedbackGenerator(style: .medium)
         generator.impactOccurred()
-
-        fetchTasks(reset: true)
     }
 }
 

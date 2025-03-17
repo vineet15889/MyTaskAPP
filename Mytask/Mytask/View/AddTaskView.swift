@@ -7,10 +7,18 @@
 
 import SwiftUI
 
-enum Priority: String, CaseIterable {
-    case low = "Low"
-    case medium = "Medium"
-    case high = "High"
+enum Priority: Int, CaseIterable {
+    case low = 1
+    case medium = 2
+    case high = 3
+    
+    var displayName: String {
+        switch self {
+        case .low: return "Low"
+        case .medium: return "Medium"
+        case .high: return "High"
+        }
+    }
 }
 
 struct AddTaskView: View {
@@ -38,9 +46,9 @@ struct AddTaskView: View {
                 // Priority Picker
                 Picker("Priority", selection: $priority) {
                     ForEach(Priority.allCases, id: \.self) { priority in
-                        Text(priority.rawValue) // Use the rawValue for display
-                            .accessibilityLabel("\(priority.rawValue) priority")
-                            .accessibilityHint("Sets the task priority to \(priority.rawValue.lowercased())")
+                        Text(priority.displayName)
+                            .accessibilityLabel("\(priority.displayName) priority")
+                            .accessibilityHint("Sets the task priority to \(priority.displayName.lowercased())")
                     }
                 }
                 .accessibilityLabel("Task priority")

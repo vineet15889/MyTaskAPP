@@ -20,22 +20,21 @@ final class TaskListUITests: XCTestCase {
     override func tearDownWithError() throws {
         app = nil
     }
-
-    func testTaskListUIElementsExist() {
-        let taskList = app.otherElements["taskList"]
-        let sortButton = app.buttons["sortButton"]
-        let filterButton = app.buttons["filterButton"]
-        
-        XCTAssertTrue(taskList.waitForExistence(timeout: 5), "Task List should be visible after saving")
-        XCTAssertTrue(sortButton.exists, "Sort button should be visible")
-        XCTAssertTrue(filterButton.exists, "Filter button should be visible")
-    }
-
+    
     func testAddTask() {
         let addButton = app.buttons["Add Task"]
         XCTAssertTrue(addButton.exists, "Add button should be visible")
         
+        let initialScale = addButton.frame.size.width
+        
         addButton.tap()
+        
+        sleep(1) // For Animation
+
+        let scaledWidth = addButton.frame.size.width
+        
+        // Verify the scale and opacity changes for animation
+        XCTAssertGreaterThan(initialScale, scaledWidth, "Add button should scale up during animation")
         
         let titleField = app.textFields["Task title"]
         XCTAssertTrue(titleField.waitForExistence(timeout: 3), "Task title field should be visible")
@@ -43,24 +42,47 @@ final class TaskListUITests: XCTestCase {
         titleField.tap()
         titleField.typeText("New Task")
         
+        let description = app.textFields["Task description"]
+        description.tap()
+        description.typeText("New Task description")
+        
         let saveButton = app.buttons["Save task"]
         XCTAssertTrue(saveButton.exists, "Save button should be visible")
         saveButton.tap()
     }
+
+    func testFilterUIElementsExist() {
+        let filterButton = app.images["Filter tasks"]
+           XCTAssertTrue(filterButton.exists, "Filter button should exist")
+           filterButton.tap()
+    
+        let filterOptionAll = app.buttons["All"]
+        XCTAssertTrue(filterOptionAll.exists, "All Filter button should exist")
+        let filterOptionPending = app.buttons["Pending"]
+        XCTAssertTrue(filterOptionPending.exists, "Pending Filter button should exist")
+        let filterOptionCompleted = app.buttons["Completed"]
+        XCTAssertTrue(filterOptionCompleted.exists, "Completed Filter button should exist")
+        filterOptionAll.tap()
+        filterButton.tap()
+        filterOptionPending.tap()
+    }
+
     
     func testSortAndFilterMenus() {
-        let sortButton = app.buttons["sortButton"]
-        let filterButton = app.buttons["filterButton"]
-        
+        let sortButton = app.images["Sort tasks"]
         XCTAssertTrue(sortButton.exists, "Sort button should be visible")
-        XCTAssertTrue(filterButton.exists, "Filter button should be visible")
-        
         sortButton.tap()
-        XCTAssertTrue(app.sheets.firstMatch.exists, "Sort menu should appear")
-        app.sheets.firstMatch.buttons.firstMatch.tap()
         
-        filterButton.tap()
-        XCTAssertTrue(app.sheets.firstMatch.exists, "Filter menu should appear")
-        app.sheets.firstMatch.buttons.firstMatch.tap()
+        let dataButton = app.buttons["Due Date"]
+        XCTAssertTrue(dataButton.exists, "All Filter button should exist")
+        let priorityButton = app.buttons["Priority"]
+        XCTAssertTrue(priorityButton.exists, "Pending Filter button should exist")
+        let TitleButton = app.buttons["Title"]
+        XCTAssertTrue(TitleButton.exists, "Completed Filter button should exist")
+        dataButton.tap()
+        sortButton.tap()
+        priorityButton.tap()
+        sortButton.tap()
+        TitleButton.tap()
     }
 }

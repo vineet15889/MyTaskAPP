@@ -19,6 +19,7 @@
 /* Begin PBXFileReference section */
 		087692B62D852D23000B5101 /* Mytask.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = Mytask.app; sourceTree = BUILT_PRODUCTS_DIR; };
 		087ED2E92D8817AD00B0B577 /* TaskUITests.xctest */ = {isa = PBXFileReference; explicitFileType = wrapper.cfbundle; includeInIndex = 0; path = TaskUITests.xctest; sourceTree = BUILT_PRODUCTS_DIR; };
+		087ED2FD2D88383D00B0B577 /* Mytask.xctestplan */ = {isa = PBXFileReference; lastKnownFileType = text; path = Mytask.xctestplan; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFileSystemSynchronizedRootGroup section */
@@ -55,6 +56,7 @@
 		087692AD2D852D23000B5101 = {
 			isa = PBXGroup;
 			children = (
+				087ED2FD2D88383D00B0B577 /* Mytask.xctestplan */,
 				087692B82D852D23000B5101 /* Mytask */,
 				087ED2EA2D8817AD00B0B577 /* TaskUITests */,
 				087692B72D852D23000B5101 /* Products */,

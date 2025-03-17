@@ -29,29 +29,12 @@ struct ClearFilterView: View {
                 .accessibilityHint("Indicates that filters are currently applied to the task list")
             
             // Subtitle
-            Text("Clear filters to see all tasks.")
+            Text("Clear filters Or Add a new task to stay on track!")
                 .font(.subheadline) // Smaller font size
                 .foregroundColor(.secondary)
                 .multilineTextAlignment(.center)
                 .accessibilityLabel("Clear filters to see all tasks")
                 .accessibilityHint("Suggests clearing filters to view all tasks")
-            
-            // Clear Filters Button
-            Button(action: {
-                onClearFilters() // Call the callback to clear filters
-            }) {
-                Text("Clear Filters")
-                    .font(.headline) // Smaller font size
-                    .fontWeight(.semibold)
-                    .foregroundColor(.white)
-                    .padding(.vertical, 12) // Smaller vertical padding
-                    .padding(.horizontal, 24) // Smaller horizontal padding
-                    .background(settingsViewModel.accentColor.color)
-                    .cornerRadius(8) // Smaller corner radius
-                    .shadow(color: settingsViewModel.accentColor.color.opacity(0.3), radius: 4, x: 0, y: 4) // Softer shadow
-            }
-            .accessibilityLabel("Clear filters button")
-            .accessibilityHint("Tap to clear all applied filters")
         }
         .padding(24) // Reduced padding for a more compact layout
         .accessibilityElement(children: .combine)

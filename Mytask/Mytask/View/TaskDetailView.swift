@@ -27,8 +27,8 @@ struct TaskDetailView: View {
                 .accessibilityHint("Displays the description of the task")
             
             // Task Priority
-            Text("Priority: \(task.priority ?? "Unknown")")
-                .accessibilityLabel("Task priority: \(task.priority ?? "Unknown")")
+            Text("Priority: \(Priority(rawValue: Int(task.priority))?.displayName ?? "")")
+                .accessibilityLabel("Task priority: \(Priority(rawValue: Int(task.priority))?.displayName ?? "")")
                 .accessibilityHint("Displays the priority level of the task")
             
             // Task Due Date

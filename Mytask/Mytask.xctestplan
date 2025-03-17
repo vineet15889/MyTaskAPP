@@ -1,0 +1,29 @@
+{
+  "configurations" : [
+    {
+      "id" : "062258AF-42A7-42CC-99BD-3EB80FF66974",
+      "name" : "Test Scheme Action",
+      "options" : {
+
+      }
+    }
+  ],
+  "defaultOptions" : {
+    "targetForVariableExpansion" : {
+      "containerPath" : "container:Mytask.xcodeproj",
+      "identifier" : "087692B52D852D23000B5101",
+      "name" : "Mytask"
+    }
+  },
+  "testTargets" : [
+    {
+      "parallelizable" : true,
+      "target" : {
+        "containerPath" : "container:Mytask.xcodeproj",
+        "identifier" : "087ED2E82D8817AD00B0B577",
+        "name" : "TaskUITests"
+      }
+    }
+  ],
+  "version" : 1
+}

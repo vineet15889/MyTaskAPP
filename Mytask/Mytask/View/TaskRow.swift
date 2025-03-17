@@ -19,6 +19,13 @@ struct TaskRow: View {
                     .font(.headline)
                     .accessibilityLabel("Task title: \(task.title ?? "Untitled")")
                     .accessibilityHint("Displays the title of the task")
+
+                // Task Description
+                Text(task.taskDescription ?? "No description")
+                    .font(.subheadline)
+                    .foregroundColor(.gray)
+                    .accessibilityLabel("Task description: \(task.taskDescription ?? "No description")")
+                    .accessibilityHint("Displays the task description")
                 
                 // Task Due Date
                 Text("Due: \(task.dueDate ?? Date(), formatter: DateFormatter.taskDateFormatter)")
@@ -28,10 +35,10 @@ struct TaskRow: View {
                     .accessibilityHint("Displays the due date of the task")
                 
                 // Task Priority
-                Text("Priority: \(task.priority ?? "Unknown")")
+                Text("Priority: \(Priority(rawValue: Int(task.priority))?.displayName ?? "")")
                     .font(.subheadline)
                     .foregroundColor(.gray)
-                    .accessibilityLabel("Task priority: \(task.priority ?? "Unknown")")
+                    .accessibilityLabel("Task priority: \(Priority(rawValue: Int(task.priority))?.displayName ?? "")")
                     .accessibilityHint("Displays the priority level of the task")
             }
             Spacer()
@@ -47,7 +54,8 @@ struct TaskRow: View {
         }
         .padding()
         .accessibilityElement(children: .combine)
-        .accessibilityLabel("Task: \(task.title ?? "Untitled"), due \(task.dueDate ?? Date(), formatter: DateFormatter.taskDateFormatter), priority \(task.priority ?? "Unknown")")
+        .accessibilityLabel("Task: \(task.title ?? "Untitled"), \(task.taskDescription ?? "No description"), due \(task.dueDate ?? Date(), formatter: DateFormatter.taskDateFormatter), priority \(Priority(rawValue: Int(task.priority))?.displayName ?? "")")
         .accessibilityHint(task.completed ? "Task is completed" : "Task is pending")
     }
 }
+
